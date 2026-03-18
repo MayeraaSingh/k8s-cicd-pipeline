@@ -29,6 +29,7 @@ jobs:
       run: |
         docker build -t $IMAGE:${{ github.sha }} .
         docker push $IMAGE:${{ github.sha }}
+        docker push $IMAGE:latest
 
   deploy:
     needs: build-push
