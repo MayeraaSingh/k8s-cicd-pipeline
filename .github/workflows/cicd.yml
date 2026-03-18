@@ -27,10 +27,9 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build & push
       run: |
-        docker build -t $IMAGE:${{ github.sha }} .
-        docker push $IMAGE:${{ github.sha }}
-        docker push $IMAGE:latest
-
+      docker build -t $IMAGE:${{ github.sha }} -t $IMAGE:latest .
+      docker push $IMAGE:${{ github.sha }}
+      docker push $IMAGE:latest
   deploy:
     needs: build-push
     runs-on: ubuntu-latest
